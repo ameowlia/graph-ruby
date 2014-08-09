@@ -1,50 +1,77 @@
 class GraphRuby
 
+	def self.histogram!(data)
+		View.clear_screen
+		self.histogram(data)
+	end 
+
 	def self.histogram(data)
-		Histogram.new(data)
+		hist = HistogramHelper.new(data)
+		header_padding = hist.padding
+
+		View.print_heading(data, header_padding)
+		View.print_numerical_value(data, header_padding)
+		# convert_to_percentages
+		# calculate_axis
+		View.print_marks(data, header_padding)
 	end 
 
 end
 
 
 # my_hash = {a: 5, b: 6, c: 10, d: 2, e: 9}
+class View
 
-
-class Histogram
-	def initialize(my_hash = {}, axis = 1)
-		@data = my_hash
-		@axis = axis
-		run
-	end
-
-	def run
-		clear_screen
-		calculate_padding
-		print_heading
-		print_value
-		# convert_to_percentages
-		# calculate_axis
-		print_values
-	end 
-	
-	def clear_screen
+	def self.clear_screen
 		puts "\e[H\e[2J"
 	end 
 
-	def print_heading
-		@data.each do |key, value|
-			print "%-#{@padding}s" % "#{key}" 
+	def self.print_heading(data, padding)
+		data.each do |key, value|
+			print "%-#{padding}s" % "#{key}" 
 		end 
 		puts ""
-		puts "-"*((@data.length*@padding)-3)
+		puts "-"*((data.length*padding)-3)
 	end 
 
-	def print_value
-		@data.each do |key, value|
-			print "%-#{@padding}s" % "#{value}" 
+	def self.print_numerical_value(data, padding)
+		data.each do |key, value|
+			print "%-#{padding}s" % "#{value}" 
 		end 
 		puts ""
 	end
+
+	def self.print_marks(data, padding)
+		all_zero = false
+		while !all_zero
+			all_zero = true
+			data.each do |key, value|
+				if value > 0
+					print print "%-#{padding}s" % "X" 
+					data[key] -=1
+					all_zero = false
+				else
+					print "%-#{padding}s" % " " 
+				end
+			end 
+			puts " "
+		end
+	end 
+
+end 
+
+
+
+class HistogramHelper
+
+	attr_reader :padding
+
+	def initialize(my_hash = {}, axis = 1)
+		@data = my_hash
+		@axis = axis
+		@padding = calculate_padding
+	end
+
 
 	def calculate_axis
 		@data.each {|key, value| @data[key] = value}
@@ -67,33 +94,22 @@ class Histogram
 	end
 
 
-	def print_values
-		all_zero = false
-		while !all_zero
-			all_zero = true
-			@data.each do |key, value|
-				if value > 0
-					print print "%-#{@padding}s" % "X" 
-					@data[key] -=1
-					all_zero = false
-				else
-					print "%-#{@padding}s" % " " 
-				end
-			end 
-			puts " "
-		end
-	end 
 
 
 	def calculate_padding
-		longest_length_sf = 0
+		longest_key_length = 0
 		@data.each do |key, value|
-			longest_length_sf = key.length if key.length > longest_length_sf
+			longest_key_length = key.length if key.length > longest_key_length
 		end 
 
-		@padding = longest_length_sf + 3
+		return longest_key_length + 3
 	end 
 
 
 
 end 
+
+
+
+
+
