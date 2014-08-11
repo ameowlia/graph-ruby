@@ -5,6 +5,11 @@ data = {a: 3, "louie" => 7}
 
 GraphRuby.histogram!(data: data, percent: true, axis: 10)
 
+describe "validate" do 
+end
+
+
+
 
 describe "HistogramHelper" do
 	context "calculate_axis" do 

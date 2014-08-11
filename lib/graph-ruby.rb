@@ -27,11 +27,6 @@ end
 
 
 
-# def valid_data?(data)
-# 	!data.is_a?(Hash) 
-# end 
-
-
 # my_hash = {a: 5, b: 6, c: 10, d: 2, e: 9}
 class View
 
