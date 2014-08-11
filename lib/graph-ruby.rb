@@ -11,6 +11,8 @@ class GraphRuby
 		percent = args[:percent] || false
 		axis = args[:axis] || 1
 
+		Validate.run(data)
+
 		hist = HistogramHelper.new(data, axis)
 		header_padding = hist.padding
 		View.print_heading(data, header_padding)
@@ -24,6 +26,27 @@ class GraphRuby
 
 end
 
+class Validate
+
+	def self.run(data)
+		@data = data
+		self.isHash
+		self.valuesAreStrings
+	end 
+
+	def self.isHash
+		raise "Data must be a hash" if (!@data.is_a?(Hash))
+	end 
+
+	def self.valuesAreStrings
+		@data.each do |key, value|
+			if (!value.is_a?(Fixnum))
+				raise "Values in data hash must be numbers" 
+			end
+		end 
+	end
+
+end 
 
 
 
