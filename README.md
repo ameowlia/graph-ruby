@@ -34,7 +34,7 @@ GraphRuby.histogram!{data: points}
 
 ```ruby
 
-points = {me: 8, you: 6}
+points = {me: 20, you: 20, DHH: 20, Matz: 20, Ada: 20, Rosalind: 20}
 
 # The histogram will graph the percentage of the values
 GraphRuby.histogram{data: points, percent: true}
