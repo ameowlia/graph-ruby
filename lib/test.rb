@@ -1,25 +1,30 @@
 require_relative 'graph-ruby'
 require 'rspec'
 
-data = {a: 3, "louie" => 3}
-
-GraphRuby.histogram!(data: data, percent: true, axis: 10)
-
 describe "ValidateData" do 
 	context "isHash" do 
-		it "returns true if data is a hash" do 
+		it "raises no error if data is a hash" do 
 			data = {a: 3, "louie" => 3}
-			error = "Data must be a hash"
 			expect {ValidateData.run(data)}.not_to raise_error
 		end 
-		it "returns false if data is not a hash" do
+		it "raises error if data is not a hash" do
 			data = [1, 2, 3]
 			error = "Data must be a hash"
 			expect {ValidateData.run(data)}.to raise_error(error) 
 		end
 	end 
 
-	
+	context "valuesAreNumbers" do 
+		it "raises no error if values are numbers" do 
+			data = {a: 3, "louie" => 3.5}
+			expect {ValidateData.run(data)}.not_to raise_error
+		end
+		it "raises error if values are strings" do 
+			data = {a: 3, "louie" => "bob"}
+			error = "Values in data hash must be numbers"
+			expect {ValidateData.run(data)}.to raise_error(error)
+		end 
+	end 
 end
 
 

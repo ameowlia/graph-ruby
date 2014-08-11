@@ -31,16 +31,16 @@ class ValidateData
 	def self.run(data)
 		@data = data
 		self.isHash
-		self.valuesAreStrings
+		self.valuesAreNumbers
 	end 
 
 	def self.isHash
 		raise "Data must be a hash" if (!@data.is_a?(Hash))
 	end 
 
-	def self.valuesAreStrings
+	def self.valuesAreNumbers
 		@data.each do |key, value|
-			if (!value.is_a?(Fixnum))
+			if (!value.is_a?(Fixnum) && !value.is_a?(Float))
 				raise "Values in data hash must be numbers" 
 			end
 		end 
