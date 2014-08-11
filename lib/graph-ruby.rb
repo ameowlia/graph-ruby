@@ -11,18 +11,25 @@ class GraphRuby
 		percent = args[:percent] || false
 		axis = args[:axis] || 1
 
-		hist = HistogramHelper.new(data)
+		hist = HistogramHelper.new(data, axis)
 		header_padding = hist.padding
 		View.print_heading(data, header_padding)
 		
 		hist.convert_to_percentages if(percent)
 			
 		View.print_numerical_value(data, header_padding)
-		hist.calculate_axis(axis)
+		hist.calculate_axis
 		View.print_marks(data, header_padding)
 	end 
 
 end
+
+
+
+
+# def valid_data?(data)
+# 	!data.is_a?(Hash) 
+# end 
 
 
 # my_hash = {a: 5, b: 6, c: 10, d: 2, e: 9}
@@ -70,7 +77,7 @@ end
 
 class HistogramHelper
 
-	attr_reader :padding
+	attr_reader :padding, :data
 
 	def initialize(my_hash = {}, axis = 1)
 		@data = my_hash
@@ -79,8 +86,10 @@ class HistogramHelper
 	end
 
 
-	def calculate_axis(value_per_mark)
-		@data.each {|key, value| @data[key] = value/value_per_mark}
+	def calculate_axis
+		if (@axis >0)
+			@data.each {|key, value| @data[key] = value/@axis}
+		end
 	end 
 
 	def convert_to_percentages
@@ -98,7 +107,6 @@ class HistogramHelper
 		end 
 		return sum
 	end
-
 
 
 
