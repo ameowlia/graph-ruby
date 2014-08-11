@@ -1,7 +1,7 @@
 require_relative 'graph-ruby'
 require 'rspec'
 
-data = {a: 3, "louie" => 7}
+data = {a: 3, "louie" => 3}
 
 GraphRuby.histogram!(data: data, percent: true, axis: 10)
 
