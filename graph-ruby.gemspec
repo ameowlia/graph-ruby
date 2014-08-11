@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
   s.authors     = ["Amelia Downs"]
   s.email       = 'downs.amelia@gmail.com'
   s.files       = ["lib/graph-ruby.rb"]
-  s.homepage    = ''
+  s.homepage    = 'https://rubygems.org/gems/graph-ruby/'
   s.license     = 'MIT'
 end
