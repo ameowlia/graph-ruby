@@ -11,7 +11,7 @@ class GraphRuby
 		percent = args[:percent] || false
 		axis = args[:axis] || 1
 
-		Validate.run(data)
+		ValidateData.run(data)
 
 		hist = HistogramHelper.new(data, axis)
 		header_padding = hist.padding
@@ -26,7 +26,7 @@ class GraphRuby
 
 end
 
-class Validate
+class ValidateData
 
 	def self.run(data)
 		@data = data

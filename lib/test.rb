@@ -5,7 +5,21 @@ data = {a: 3, "louie" => 3}
 
 GraphRuby.histogram!(data: data, percent: true, axis: 10)
 
-describe "validate" do 
+describe "ValidateData" do 
+	context "isHash" do 
+		it "returns true if data is a hash" do 
+			data = {a: 3, "louie" => 3}
+			error = "Data must be a hash"
+			expect {ValidateData.run(data)}.not_to raise_error
+		end 
+		it "returns false if data is not a hash" do
+			data = [1, 2, 3]
+			error = "Data must be a hash"
+			expect {ValidateData.run(data)}.to raise_error(error) 
+		end
+	end 
+
+	
 end
 
 
