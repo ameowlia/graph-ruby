@@ -28,6 +28,7 @@ GraphRuby.histogram{data: points}
 # If you want it to clear the screen before it prints the graph use a bang (!)
 GraphRuby.histogram!{data: points}
 ```
+![Simple Histogram](/images/simpleHistogram.png?raw=true "Simple Histogram")
 
 ###Percentage Histogram
 
@@ -39,6 +40,7 @@ points = {me: 8, you: 6}
 GraphRuby.histogram{data: points, percent: true}
 
 ```
+![Percentage Histogram](/images/percentageHistogram.png?raw=true "Percentage Histogram")
 ###Change the axis
 
 ```ruby
@@ -50,3 +52,4 @@ points = {me: 80, you: 60}
 GraphRuby.histogram{data: points, axis: 10}
 
 ```
+![changedAxis Histogram](/images/changedAxisHistogram.png?raw=true "changedAxis Histogram")
